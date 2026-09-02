@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>Gestor de factures mensuals</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">FACTURES PROBA</p>
+        <h1>Gestor de factures</h1>
+        <p class="subtitle">Prepara, revisa i descarrega les factures mensuals en PDF.</p>
+      </div>
+      <div class="status-pill"><span></span> Desat en aquest dispositiu</div>
+    </header>
+
+    <section class="card controls-card">
+      <div class="section-heading">
+        <div><span class="step">1</span><div><h2>Selecciona el període</h2><p>La numeració es calcula automàticament segons el mes.</p></div></div>
+      </div>
+      <div class="period-row">
+        <label>Mes i any
+          <input id="period" type="month" value="2026-10">
+        </label>
+        <button id="reset" class="button secondary">Restablir preus base</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div><span class="step">2</span><div><h2>Revisa els clients</h2><p>Actualitza el preu directament o aplica l’IPC abans de descarregar.</p></div></div>
+      </div>
+      <div id="clients" class="client-grid"></div>
+    </section>
+
+    <section class="card comments-card">
+      <div class="section-heading">
+        <div><span class="step">3</span><div><h2>Comentaris i canvis</h2><p>Escriu qualsevol ajust que vulguis deixar registrat per a aquest període.</p></div></div>
+      </div>
+      <textarea id="comments" placeholder="Ex.: aplicar un IPC del 2,5 % al local 9A; canviar el concepte de la factura..."></textarea>
+      <div class="attachment-row"><label class="file-picker">Afegir documents <input id="attachments" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.xls,.xlsx,.csv,.txt"></label><span>PDF, imatges, Word o Excel</span></div>
+      <div id="attachment-list" class="attachment-list" aria-live="polite"></div>
+      <div class="hint">Els camps de preu i IPC són els que modifiquen automàticament els imports del PDF. El comentari queda desat com a nota de revisió.</div>
+    </section>
+
+    <section class="download-bar">
+      <div><strong id="summary">3 factures preparades</strong><span> Tria quines vols descarregar.</span></div>
+      <div class="download-actions"><button id="download-selected" class="button secondary">Descarregar seleccionades</button><button id="download-all" class="button primary">Descarregar-les totes</button></div>
+    </section>
+  </main>
+
+  <div id="review" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="review-title">
+    <div class="modal-panel">
+      <button id="close-review" class="close" aria-label="Cerrar">×</button>
+      <p class="eyebrow">ÚLTIMA REVISIÓ</p>
+      <h2 id="review-title">Vols descarregar les factures?</h2>
+      <p id="review-copy"></p>
+      <div id="review-list" class="review-list"></div>
+      <div class="modal-actions"><button id="cancel" class="button secondary">Tornar a editar</button><button id="confirm" class="button primary">Descarregar</button></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

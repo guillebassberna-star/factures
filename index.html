@@ -6,6 +6,7 @@
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <title>Gestor de factures mensuals</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="overrides.css">
 </head>
 <body>
   <main class="app-shell">
@@ -32,8 +33,9 @@
 
     <section class="card">
       <div class="section-heading">
-        <div><span class="step">2</span><div><h2>Revisa els clients</h2><p>Actualitza el preu directament o aplica l’IPC abans de descarregar.</p></div></div>
+        <div><span class="step">2</span><div><h2>Revisa els clients</h2><p>Actualitza preus, dades fiscals i clients abans de descarregar.</p></div></div>
       </div>
+      <div class="client-tools"><button id="add-client" class="button secondary" type="button">+ Afegir client</button></div>
       <div id="clients" class="client-grid"></div>
     </section>
 
@@ -64,7 +66,39 @@
     </div>
   </div>
 
+  <div id="ipc-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="ipc-title">
+    <div class="modal-panel">
+      <button id="close-ipc" class="close" aria-label="Tancar">×</button>
+      <p class="eyebrow">APLICAR L’IPC</p>
+      <h2 id="ipc-title">Com vols aplicar aquest canvi?</h2>
+      <p id="ipc-copy"></p>
+      <div class="ipc-choice"><button id="ipc-current" class="button secondary">Només aquest mes</button><button id="ipc-fix" class="button primary">Fixar com a nova base</button></div>
+    </div>
+  </div>
+
+  <div id="client-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="client-title">
+    <div class="modal-panel client-form-panel">
+      <button id="close-client" class="close" aria-label="Tancar">×</button>
+      <p class="eyebrow">DADES DEL CLIENT</p>
+      <h2 id="client-title">Afegir client</h2>
+      <form id="client-form" class="client-form">
+        <input id="client-key" type="hidden">
+        <label>Nom comercial o descripció<input id="client-short" required></label>
+        <label>Nom fiscal / empresa<input id="client-company" required></label>
+        <label>NIF / CIF<input id="client-tax" required></label>
+        <label>Adreça fiscal<input id="client-address" required></label>
+        <label>Codi postal i població<input id="client-city" required></label>
+        <label>Telèfon<input id="client-tel"></label>
+        <label>Concepte de la factura<input id="client-concept" required></label>
+        <label>Sèrie<input id="client-prefix" value="C" maxlength="1" required></label>
+        <label>Número inicial d’octubre 2026<input id="client-start" type="number" min="1" step="1" required></label>
+        <label>Preu base<input id="client-price" type="number" min="0" step="0.01" required></label>
+        <div class="form-actions"><button id="cancel-client" class="button secondary" type="button">Cancel·lar</button><button class="button primary" type="submit">Desar client</button></div>
+      </form>
+    </div>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="app.js?v=2"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>

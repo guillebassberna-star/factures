@@ -4,7 +4,7 @@ const defaults=[{key:"nineA",short:"Local 9A",company:"TELIEMPORDA, SL",email:""
 let clients=JSON.parse(localStorage.getItem(CLIENTS_KEY)||"null")||defaults,settings=JSON.parse(localStorage.getItem(SETTINGS_KEY)||"null")||{};
 function period(){const [y,m]=($("email-period").value||"2026-10").split("-").map(Number);return{year:y,month:m}}
 function month(){return new Intl.DateTimeFormat("ca-ES",{month:"long",year:"numeric"}).format(new Date(`${$("email-period").value}-01`))}
-function numberFor(c){const d=period(),delta=(d.year-2026)*12+d.month-10;return `${c.prefix||"C"}${d.year}-${String((c.startNumber||1)+delta).padStart(5,"0")}`}
+function numberFor(c){const d=period(),delta=(d.year-2026)*12+d.month-10,initial=c.startNumber||({nineA:19,nineB:20,A:11}[c.key]||1);return `${c.prefix||((c.key==="A")?"A":"C")}${d.year}-${String(initial+delta).padStart(5,"0")}`}
 function total(c){const v=settings[c.key]?.totalOverride,price=Number(settings[c.key]?.price??c.base??0);return Number.isFinite(v)?v:+(price+price*.21-price*.19).toFixed(2)}
 function template(value,c){const d=period(),m=month(),replacements={"{client}":c.company||c.short,"{mes}":m,"{numero}":numberFor(c),"{total}":money(total(c))};return Object.entries(replacements).reduce((text,[from,to])=>text.split(from).join(to),value)}
 function saveEmail(key,email){const c=clients.find(x=>x.key===key);if(c){c.email=email;localStorage.setItem(CLIENTS_KEY,JSON.stringify(clients))}}

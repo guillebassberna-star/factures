@@ -16,7 +16,7 @@
         <h1>Gestor de factures</h1>
         <p class="subtitle">Prepara, revisa i descarrega les factures mensuals en PDF.</p>
       </div>
-      <div class="status-pill"><span></span> Desat en aquest dispositiu</div>
+      <div class="topbar-actions"><a class="button secondary mail-link" href="emails.html">Enviar factures per correu</a><div class="status-pill"><span></span> Desat en aquest dispositiu</div></div>
     </header>
 
     <section class="card controls-card">
@@ -28,6 +28,19 @@
           <input id="period" type="month" value="2026-10">
         </label>
         <button id="reset" class="button secondary">Restablir preus base</button>
+      </div>
+    </section>
+
+    <section class="card ipc-reference-card" aria-labelledby="general-ipc-title">
+      <div class="ipc-reference-copy">
+        <p class="eyebrow">REFERÈNCIA GENERAL</p>
+        <h2 id="general-ipc-title">Taxa anual de variació de l’IPC</h2>
+        <p id="general-ipc-copy">Consultant la dada oficial de l’INE per al període seleccionat.</p>
+        <p class="ipc-source">Font: <a href="https://www.ine.es/calcula/" target="_blank" rel="noopener">INE · El IPC en un clic</a></p>
+      </div>
+      <div class="ipc-reference-value">
+        <strong id="general-ipc-value">—</strong>
+        <span id="general-ipc-status">Consultant l’INE…</span>
       </div>
     </section>
 
@@ -44,9 +57,9 @@
         <div><span class="step">3</span><div><h2>Comentaris i canvis</h2><p>Escriu qualsevol ajust que vulguis deixar registrat per a aquest període.</p></div></div>
       </div>
       <textarea id="comments" placeholder="Ex.: aplicar un IPC del 2,5 % al local 9A; canviar el concepte de la factura..."></textarea>
-      <div class="attachment-row"><label class="file-picker">Afegir documents <input id="attachments" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.xls,.xlsx,.csv,.txt"></label><span>PDF, imatges, Word o Excel</span></div>
-      <div id="attachment-list" class="attachment-list" aria-live="polite"></div>
       <div class="hint">Els camps de preu i IPC són els que modifiquen automàticament els imports del PDF. El comentari queda desat com a nota de revisió.</div>
+      <input id="attachments" type="file" hidden>
+      <div id="attachment-list" hidden></div>
     </section>
 
     <section class="download-bar">
@@ -89,6 +102,7 @@
         <label>Adreça fiscal<input id="client-address" required></label>
         <label>Codi postal i població<input id="client-city" required></label>
         <label>Telèfon<input id="client-tel"></label>
+        <label>Correu electrònic<input id="client-email" type="email" placeholder="client@exemple.com"></label>
         <label>Concepte de la factura<input id="client-concept" required></label>
         <label>Sèrie<input id="client-prefix" value="C" maxlength="1" required></label>
         <label>Número inicial d’octubre 2026<input id="client-start" type="number" min="1" step="1" required></label>
@@ -99,6 +113,6 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

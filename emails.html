@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>Enviament de factures per correu</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="overrides.css">
+</head>
+<body>
+  <main class="app-shell email-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">FACTURES PROBA</p>
+        <h1>Enviament per correu</h1>
+        <p class="subtitle">Prepara el correu mensual de cada client des d’una pàgina separada.</p>
+      </div>
+      <a class="button secondary mail-link" href="index.html">Tornar al gestor</a>
+    </header>
+
+    <section class="card">
+      <div class="section-heading"><div><span class="step">1</span><div><h2>Configura el missatge</h2><p>El text queda preparat segons el mes i el client seleccionats.</p></div></div></div>
+      <div class="email-settings">
+        <label>Mes i any<input id="email-period" type="month" value="2026-10"></label>
+        <label>Assumpte<input id="email-subject" value="Factura {mes} · {client}"></label>
+      </div>
+      <label class="email-body-label">Cos del correu<textarea id="email-body" rows="7">Bon dia {client},
+
+Us adjunto la factura corresponent al mes de {mes}.
+
+Gràcies.</textarea></label>
+      <p class="hint">Pots utilitzar {client}, {mes}, {numero} i {total}. El botó obre Gmail amb el destinatari, l’assumpte i el text ja preparats.</p>
+    </section>
+
+    <section class="card">
+      <div class="section-heading"><div><span class="step">2</span><div><h2>Tria el client</h2><p>El correu del client es desa en aquest dispositiu.</p></div></div></div>
+      <div id="email-clients" class="email-client-list"></div>
+    </section>
+  </main>
+  <script src="emails.js?v=1"></script>
+</body>
+</html>
